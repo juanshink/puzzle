@@ -1,0 +1,65 @@
+
+<div id="fondo" class="absolute top-1/2 left-1/2 
+                      transform -translate-x-1/2 -translate-y-1/2
+                      bg-gray-300 w-1/4 h-1/2 
+                      scale-80">
+  
+    
+    <div id="tablero" class="grid w-full h-full p-5 gap-5 grid-cols-4"  
+    [style.gridTemplateColumns]="'repeat(' + tablero.columnas + ', 1fr)'"
+    [style.gridTemplateRows]="'repeat(' + tablero.filas + ', 1fr)'">
+
+
+
+          <!-- Puerta -->
+          <div id="puerta"
+          class="absolute top-0 left-1/2 transform -translate-x-1/2 h-[2px] w-1/2 bg-green-500 col-span-2">
+          &nbsp;
+        </div>
+
+        <!-- Fichas principales -->
+        <div *ngFor="let ficha of fichas" class="w-full h-full relative cursor-grab" [style.backgroundColor]="ficha.color"
+          [style.gridColumn]="ficha.posy" [style.gridRow]="ficha.posx"
+          [style.gridColumnEnd]="ficha.posy + ficha.columnas" [style.gridRowEnd]="ficha.posx + ficha.filas"
+    >   
+
+          <button class="absolute left-0 w-auto h-full p-1" 
+          (click)="moverIzq(ficha)">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+
+          <button class="absolute right-0 w-auto h-full p-1"
+          (click)="moverDer(ficha)">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+
+          <button class="absolute top-0 w-full h-auto p-1"
+          (click)="moverArriba(ficha)">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+
+          <button class="absolute bottom-0 w-full h-auto p-1"
+          (click)="moverAbajo(ficha)">
+            <i class="fas fa-arrow-down"></i>
+          </button>
+
+        </div>
+
+
+    </div>
+
+    <div *ngIf="haswin">
+      
+      <div class="mt-1 relative p-6 bg-green-300 flex flex-col justify-center "> 
+       
+        <h1 class="flex justify-center">BIEN, GANASTE  </h1>
+        
+      </div>
+    </div>
+    
+    <div> Contador= {{contador}}</div>
+
+    <button class="bg-white border w-full p-5" (click)="reiniciarJuego()"> Reiniciar </button>
+   
+
+</div>
